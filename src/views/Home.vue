@@ -1,18 +1,42 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="container">
+      <b-card-group>
+        <b-card>
+          <Calculator @sendData="getFormData" @resetData="getFormData" />
+        </b-card>
+        <b-card
+          v-show="formData.show"
+          :style="{
+            backgroundColor: formData.color,
+            borderColor: formData.color,
+          }"
+        >
+          <Result :setFormData="formData" />
+        </b-card>
+      </b-card-group>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import Calculator from "@/components/Calculator.vue";
+import Result from "@/components/Result.vue";
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    Calculator,
+    Result,
+  },
+  data() {
+    return {
+      formData: {},
+    };
+  },
+  methods: {
+    getFormData(formData) {
+      this.formData = formData;
+    },
   },
 };
 </script>
